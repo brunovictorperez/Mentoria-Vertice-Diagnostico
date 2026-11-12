@@ -77,7 +77,6 @@
             font-weight: 500;
             box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.28);
         }
-        /* Destaque sutil para o negrito das perguntas */
         .question-title strong {
             font-weight: 600;
             color: #ffffff;
@@ -97,30 +96,24 @@
     <div id="orb1" class="ambient-orb-1"></div>
     <div id="orb2" class="ambient-orb-2"></div>
 
-    <!-- Barra de Progresso Superior -->
     <div class="fixed top-0 left-0 w-full h-1 bg-white/5 z-50">
         <div id="progressBar" class="h-full bg-white/85 transition-all duration-500 ease-out" style="width: 0%"></div>
     </div>
 
-    <!-- Wrapper Central -->
     <div class="w-full max-w-2xl z-10 my-auto flex flex-col items-center">
         
-        <!-- Título Fixo Acima do Card -->
         <div class="mb-5 text-center">
             <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium tracking-widest uppercase bg-white/[0.06] border border-white/15 text-white/90 backdrop-blur-md shadow-sm">
                 Mentoria Vértice <span class="text-white/30">|</span> Diagnóstico
             </span>
         </div>
 
-        <!-- Card Principal Glassmorphism -->
         <div class="glass-card rounded-3xl p-6 sm:p-11 w-full relative">
-            <div id="quizHeader" class="flex items-center justify-between text-xs uppercase tracking-widest text-white/45 mb-7 hidden">
+            <div id="quizHeader" class="flex items-center justify-center text-xs uppercase tracking-widest text-white/45 mb-7 hidden">
                 <span id="sectionBadge">01 • Perfil</span>
-                <span id="stepCounter">01 / 36</span>
             </div>
 
             <div id="stepContainer" class="step-transition step-visible min-h-[250px] flex flex-col justify-center">
-                <!-- Conteúdo injetado via JS -->
             </div>
 
             <div id="navFooter" class="flex items-center justify-between mt-9 pt-5 border-t border-white/10 hidden">
@@ -142,21 +135,19 @@
     <script>
         const GOOGLE_FORMS_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeAU1mT57ChiyeM7dqgi9tSmmunQex1Ng7iMhrOtzBIF3Ol9w/formResponse';
 
-        // Paletas dinâmicas de cores para variar a cada pergunta mantendo o estilo Apple Glass
         const colorThemes = [
-            { bg: '#1e1b4b', orb1: 'rgba(99, 102, 241, 0.30)', orb2: 'rgba(56, 189, 248, 0.22)' }, // Indigo & Sky
-            { bg: '#0f2942', orb1: 'rgba(14, 165, 233, 0.28)', orb2: 'rgba(139, 92, 246, 0.22)' }, // Sapphire & Violet
-            { bg: '#27153d', orb1: 'rgba(168, 85, 247, 0.28)', orb2: 'rgba(236, 72, 153, 0.20)' }, // Purple & Rose
-            { bg: '#0c2e2c', orb1: 'rgba(20, 184, 166, 0.26)', orb2: 'rgba(59, 130, 246, 0.22)' }, // Teal & Blue
-            { bg: '#1e1b38', orb1: 'rgba(129, 140, 248, 0.28)', orb2: 'rgba(45, 212, 191, 0.20)' }, // Slate Indigo & Mint
-            { bg: '#2d162c', orb1: 'rgba(217, 70, 239, 0.25)', orb2: 'rgba(99, 102, 241, 0.24)' }, // Fuchsia & Indigo
-            { bg: '#112240', orb1: 'rgba(59, 130, 246, 0.30)', orb2: 'rgba(16, 185, 129, 0.18)' }  // Deep Ocean & Emerald
+            { bg: '#1e1b4b', orb1: 'rgba(99, 102, 241, 0.30)', orb2: 'rgba(56, 189, 248, 0.22)' },
+            { bg: '#0f2942', orb1: 'rgba(14, 165, 233, 0.28)', orb2: 'rgba(139, 92, 246, 0.22)' },
+            { bg: '#27153d', orb1: 'rgba(168, 85, 247, 0.28)', orb2: 'rgba(236, 72, 153, 0.20)' },
+            { bg: '#0c2e2c', orb1: 'rgba(20, 184, 166, 0.26)', orb2: 'rgba(59, 130, 246, 0.22)' },
+            { bg: '#1e1b38', orb1: 'rgba(129, 140, 248, 0.28)', orb2: 'rgba(45, 212, 191, 0.20)' },
+            { bg: '#2d162c', orb1: 'rgba(217, 70, 239, 0.25)', orb2: 'rgba(99, 102, 241, 0.24)' },
+            { bg: '#112240', orb1: 'rgba(59, 130, 246, 0.30)', orb2: 'rgba(16, 185, 129, 0.18)' }
         ];
 
         const questions = [
             { id: 'intro', type: 'welcome' },
 
-            // SEÇÃO 1: Dados Pessoais
             { id: 'entry.100152716', section: '01 • Perfil', title: 'Qual é o seu <strong>nome completo</strong>?', type: 'text', placeholder: 'Digite seu nome completo...' },
             { id: 'entry.669756892', section: '01 • Perfil', title: 'Qual é o seu <strong>CPF</strong>?', type: 'tel', mask: 'cpf', placeholder: '000.000.000-00' },
             { id: 'entry.1709873192', section: '01 • Perfil', title: 'Qual a sua <strong>data de nascimento</strong>?', type: 'date' },
@@ -164,119 +155,33 @@
             { id: 'entry.1941867306', section: '01 • Perfil', title: 'Seu <strong>WhatsApp</strong> com DDD', type: 'tel', mask: 'phone', placeholder: '(11) 99999-9999' },
             { id: 'entry.1938649082', section: '01 • Perfil', title: 'Qual é o seu <strong>@ do Instagram</strong>?', type: 'text', placeholder: '@seu.arquitetura' },
             { id: 'entry.176991051', section: '01 • Perfil', title: 'Qual o seu <strong>endereço completo</strong>?', subtitle: 'Rua, número, bairro, cidade, estado e CEP.', type: 'textarea', placeholder: 'Ex: Rua Oscar Freire, 100, Jardins, São Paulo - SP, 01426-000' },
-            { 
-                id: 'entry.621054078', section: '01 • Perfil', title: 'Como você <strong>chegou até nós</strong>?', type: 'radio', 
-                options: [
-                    { label: 'Tráfego', value: 'Tráfego' },
-                    { label: 'Indicação', value: 'Indicação' },
-                    { label: 'Instagram (feed, stories ou direct)', value: 'Instagram (feed/stories/direct)' },
-                    { label: 'Outro', value: 'Outro' }
-                ] 
-            },
+            { id: 'entry.621054078', section: '01 • Perfil', title: 'Como você <strong>chegou até nós</strong>?', type: 'radio', options: [{ label: 'Tráfego', value: 'Tráfego' }, { label: 'Indicação', value: 'Indicação' }, { label: 'Instagram (feed, stories ou direct)', value: 'Instagram (feed/stories/direct)' }, { label: 'Outro', value: 'Outro' }] },
 
-            // SEÇÃO 2: Momento Profissional
             { id: 'entry.6943093', section: '02 • Momento Atual', title: 'Qual foi o <strong>ponto decisivo</strong> que te fez entrar para a mentoria?', type: 'textarea', placeholder: 'Compartilhe o que mais pesou na sua decisão...' },
-            { 
-                id: 'entry.1084000870', section: '02 • Momento Atual', title: 'Qual opção melhor representa seu <strong>momento profissional hoje</strong>?', type: 'radio', 
-                options: [
-                    { label: 'Estou na faculdade', value: 'Estou na faculdade' },
-                    { label: 'Sou recém-formado(a)', value: 'Sou recém-formado(a)' },
-                    { label: 'Trabalho em um escritório', value: 'Trabalho em um escritório' },
-                    { label: 'Trabalho como autônomo', value: 'Trabalho como autônomo' },
-                    { label: 'Tenho um escritório', value: 'Tenho um escritório' },
-                    { label: 'Tenho um escritório em sociedade', value: 'Tenho um escritório em sociedade' }
-                ] 
-            },
+            { id: 'entry.1084000870', section: '02 • Momento Atual', title: 'Qual opção melhor representa seu <strong>momento profissional hoje</strong>?', type: 'radio', options: [{ label: 'Estou na faculdade', value: 'Estou na faculdade' }, { label: 'Sou recém-formado(a)', value: 'Sou recém-formado(a)' }, { label: 'Trabalho em um escritório', value: 'Trabalho em um escritório' }, { label: 'Trabalho como autônomo', value: 'Trabalho como autônomo' }, { label: 'Tenho um escritório', value: 'Tenho um escritório' }, { label: 'Tenho um escritório em sociedade', value: 'Tenho um escritório em sociedade' }] },
             { id: 'entry.713052862', section: '02 • Momento Atual', title: 'Há <strong>quanto tempo</strong> você atua profissionalmente com arquitetura?', type: 'text', placeholder: 'Ex: 2 anos e meio' },
             { id: 'entry.568116894', section: '02 • Momento Atual', title: 'Qual <strong>principal desafio</strong> você espera resolver?', type: 'textarea', placeholder: 'Descreva seu principal desafio hoje...' },
             { id: 'entry.132724317', section: '02 • Momento Atual', title: 'Qual seu <strong>objetivo</strong> para os <strong>próximos 6 meses</strong>?', type: 'textarea', placeholder: 'O que você quer conquistar nos próximos 6 meses...' },
             { id: 'entry.2120486748', section: '02 • Momento Atual', title: 'De 0 a 10, qual o nível que você poderá <strong>dedicar ao seu processo de transformação</strong> nos próximos 6 meses?', type: 'scale' },
 
-            // SEÇÃO 3: Comercial & Vendas
-            { 
-                id: 'entry.1656253064', section: '03 • Comercial & Vendas', title: 'Quantos <strong>projetos próprios</strong> você fecha, em média, <strong>por mês</strong>?', type: 'radio', 
-                options: [
-                    { label: 'Nenhum', value: 'Nenhum' },
-                    { label: '1 projeto', value: '1' },
-                    { label: '2 projetos', value: '2' },
-                    { label: '3 a 5 projetos', value: '3 a 5' },
-                    { label: '5 a 10 projetos', value: '5 a 10' },
-                    { label: 'Mais de 10 projetos', value: 'Mais de 10' }
-                ] 
-            },
-            { 
-                id: 'entry.1624959817', section: '03 • Comercial & Vendas', title: 'De onde vêm seus <strong>clientes atualmente</strong>?', subtitle: 'Você pode selecionar mais de uma opção. Depois, clique em Continuar.', type: 'checkbox', 
-                options: [
-                    { label: 'Indicação', value: '●    Indicação' },
-                    { label: 'Instagram', value: '●    Instagram' },
-                    { label: 'Prospecção ativa', value: '●    Prospecção ativa' },
-                    { label: 'Parcerias', value: '●    Parcerias' },
-                    { label: 'Tráfego pago', value: '●    Tráfego pago' },
-                    { label: 'Networking', value: '●    Networking' },
-                    { label: 'Ainda não tenho clientes próprios', value: '●    Ainda não tenho clientes próprios' }
-                ] 
-            },
+            { id: 'entry.1656253064', section: '03 • Comercial & Vendas', title: 'Quantos <strong>projetos próprios</strong> você fecha, em média, <strong>por mês</strong>?', type: 'radio', options: [{ label: 'Nenhum', value: 'Nenhum' }, { label: '1 projeto', value: '1' }, { label: '2 projetos', value: '2' }, { label: '3 a 5 projetos', value: '3 a 5' }, { label: '5 a 10 projetos', value: '5 a 10' }, { label: 'Mais de 10 projetos', value: 'Mais de 10' }] },
+            { id: 'entry.1624959817', section: '03 • Comercial & Vendas', title: 'De onde vêm seus <strong>clientes atualmente</strong>?', subtitle: 'Você pode selecionar mais de uma opção. Depois, clique em Continuar.', type: 'checkbox', options: [{ label: 'Indicação', value: '●    Indicação' }, { label: 'Instagram', value: '●    Instagram' }, { label: 'Prospecção ativa', value: '●    Prospecção ativa' }, { label: 'Parcerias', value: '●    Parcerias' }, { label: 'Tráfego pago', value: '●    Tráfego pago' }, { label: 'Networking', value: '●    Networking' }, { label: 'Ainda não tenho clientes próprios', value: '●    Ainda não tenho clientes próprios' }] },
             { id: 'entry.1722388897', section: '03 • Comercial & Vendas', title: 'De 0 a 10, quanto você se sente capaz de conseguir um <strong>novo cliente sem depender de indicação</strong>?', type: 'scale' },
             { id: 'entry.1392316347', section: '03 • Comercial & Vendas', title: 'Qual é o <strong>ticket médio aproximado</strong> dos seus projetos hoje?', type: 'text', placeholder: 'Ex: R$ 6.000,00' },
             { id: 'entry.1455325774', section: '03 • Comercial & Vendas', title: 'De 0 a 10, quanto você se sente <strong>seguro(a) para definir o preço</strong> de um projeto?', type: 'scale' },
             { id: 'entry.932409719', section: '03 • Comercial & Vendas', title: 'De 0 a 10, qual é o seu nível de <strong>conhecimento e confiança em vendas</strong>?', type: 'scale' },
-            { 
-                id: 'entry.1046076986', section: '03 • Comercial & Vendas', title: 'Quando você <strong>apresenta uma proposta</strong>, o que costuma acontecer?', subtitle: 'Você pode selecionar mais de uma opção, se necessário.', type: 'checkbox', 
-                options: [
-                    { label: 'O cliente fecha', value: '● O cliente fecha' },
-                    { label: 'O cliente pede desconto', value: '● O cliente pede desconto' },
-                    { label: 'O cliente diz que está caro', value: '● O cliente diz que está caro' },
-                    { label: 'O cliente some', value: '● O cliente some' },
-                    { label: 'O cliente demora muito para decidir', value: '● O cliente demora muito para decidir' },
-                    { label: 'Ainda tenho poucas propostas para avaliar', value: '● Ainda tenho poucas propostas para avaliar' }
-                ] 
-            },
+            { id: 'entry.1046076986', section: '03 • Comercial & Vendas', title: 'Quando você <strong>apresenta uma proposta</strong>, o que costuma acontecer?', subtitle: 'Você pode selecionar mais de uma opção, se necessário.', type: 'checkbox', options: [{ label: 'O cliente fecha', value: '● O cliente fecha' }, { label: 'O cliente pede desconto', value: '● O cliente pede desconto' }, { label: 'O cliente diz que está caro', value: '● O cliente diz que está caro' }, { label: 'O cliente some', value: '● O cliente some' }, { label: 'O cliente demora muito para decidir', value: '● O cliente demora muito para decidir' }, { label: 'Ainda tenho poucas propostas para avaliar', value: '● Ainda tenho poucas propostas para avaliar' }] },
 
-            // SEÇÃO 4: Posicionamento & Portfólio
             { id: 'entry.192411806', section: '04 • Posicionamento', title: 'De 0 a 10, qual nota você dá hoje para o seu <strong>portfólio</strong>?', type: 'scale' },
-            { 
-                id: 'entry.842595649', section: '04 • Posicionamento', title: 'Você acredita que sua <strong>imagem profissional</strong> transmite o nível do seu trabalho?', type: 'radio', 
-                options: [
-                    { label: 'Sim', value: '- Sim' },
-                    { label: 'Em partes', value: '- Em partes' },
-                    { label: 'Pouco', value: '- Pouco' },
-                    { label: 'Não', value: '- Não' }
-                ] 
-            },
+            { id: 'entry.842595649', section: '04 • Posicionamento', title: 'Você acredita que sua <strong>imagem profissional</strong> transmite o nível do seu trabalho?', type: 'radio', options: [{ label: 'Sim', value: '- Sim' }, { label: 'Em partes', value: '- Em partes' }, { label: 'Pouco', value: '- Pouco' }, { label: 'Não', value: '- Não' }] },
             { id: 'entry.1272591494', section: '04 • Posicionamento', title: 'Hoje, em qual <strong>plataforma</strong> você apresenta seus <strong>projetos e seu trabalho</strong>?', type: 'textarea', placeholder: 'Ex: Instagram, Behance, Site próprio, PDF...' },
 
-            // SEÇÃO 5: Rotina & Execução
             { id: 'entry.616102656', section: '05 • Rotina & Processos', title: 'De 0 a 10, quanto você considera sua <strong>rotina produtiva</strong> hoje?', type: 'scale' },
-            { 
-                id: 'entry.642110207', section: '05 • Rotina & Processos', title: 'Com qual frequência você <strong>trabalha além do horário</strong> ou <strong>vira noites</strong> para entregar projetos?', type: 'radio', 
-                options: [
-                    { label: 'Nunca', value: '● Nunca' },
-                    { label: 'Raramente', value: '● Raramente' },
-                    { label: 'Algumas vezes por mês', value: '● Algumas vezes por mês' },
-                    { label: 'Toda semana', value: '● Toda semana' },
-                    { label: 'Quase todos os dias', value: '● Quase todos os dias' },
-                    { label: 'Todos os dias', value: '● Todos os dias' }
-                ] 
-            },
+            { id: 'entry.642110207', section: '05 • Rotina & Processos', title: 'Com qual frequência você <strong>trabalha além do horário</strong> ou <strong>vira noites</strong> para entregar projetos?', type: 'radio', options: [{ label: 'Nunca', value: '● Nunca' }, { label: 'Raramente', value: '● Raramente' }, { label: 'Algumas vezes por mês', value: '● Algumas vezes por mês' }, { label: 'Toda semana', value: '● Toda semana' }, { label: 'Quase todos os dias', value: '● Quase todos os dias' }, { label: 'Todos os dias', value: '● Todos os dias' }] },
             { id: 'entry.1617617140', section: '05 • Rotina & Processos', title: 'De 0 a 10, quanto <strong>controle</strong> você sente que tem sobre <strong>prazos e entregas</strong>?', type: 'scale' },
-            { 
-                id: 'entry.243805061', section: '05 • Rotina & Processos', title: 'Qual é o <strong>principal gargalo</strong> da sua <strong>execução</strong> hoje?', subtitle: 'Selecione um ou mais gargalos e depois clique em Continuar.', type: 'checkbox', 
-                options: [
-                    { label: 'Modelagem', value: '● Modelagem' },
-                    { label: 'Renderização', value: '● Renderização' },
-                    { label: 'Projeto executivo', value: '● Projeto executivo' },
-                    { label: 'Pós-produção', value: '● Pós-produção' },
-                    { label: 'Organização', value: '● Organização' },
-                    { label: 'Alterações dos clientes', value: '● Alterações dos clientes' },
-                    { label: 'Retrabalho', value: '● Retrabalho' },
-                    { label: 'Falta de processo', value: '● Falta de processo' },
-                    { label: 'Falta de domínio técnico', value: '● Falta de domínio técnico' },
-                    { label: 'Gestão de prazo', value: '● Gestão de prazo' }
-                ] 
-            },
+            { id: 'entry.243805061', section: '05 • Rotina & Processos', title: 'Qual é o <strong>principal gargalo</strong> da sua <strong>execução</strong> hoje?', subtitle: 'Selecione um ou mais gargalos e depois clique em Continuar.', type: 'checkbox', options: [{ label: 'Modelagem', value: '● Modelagem' }, { label: 'Renderização', value: '● Renderização' }, { label: 'Projeto executivo', value: '● Projeto executivo' }, { label: 'Pós-produção', value: '● Pós-produção' }, { label: 'Organização', value: '● Organização' }, { label: 'Alterações dos clientes', value: '● Alterações dos clientes' }, { label: 'Retrabalho', value: '● Retrabalho' }, { label: 'Falta de processo', value: '● Falta de processo' }, { label: 'Falta de domínio técnico', value: '● Falta de domínio técnico' }, { label: 'Gestão de prazo', value: '● Gestão de prazo' }] },
             { id: 'entry.202934998', section: '05 • Rotina & Processos', title: 'De 0 a 10, quanto você <strong>domina hoje as ferramentas e softwares</strong> necessários para executar seus projetos?', type: 'scale' },
 
-            // SEÇÃO 6: Visão de Futuro & Comprometimento (Corrigido com pageHistory 0..6)
             { id: 'entry.378176372', section: '06 • Visão & Futuro', title: 'De 0 a 10, como você avalia sua <strong>gestão financeira profissional</strong> hoje?', type: 'scale' },
             { id: 'entry.137605010', section: '06 • Visão & Futuro', title: 'Onde você gostaria de estar <strong>profissional e financeiramente</strong> daqui a <strong>6 meses</strong>?', type: 'textarea', placeholder: 'Descreva sua meta profissional e financeira...' },
             { id: 'entry.53764938', section: '06 • Visão & Futuro', title: 'Qual <strong>resultado</strong> faria você terminar os 6 meses da Mentoria Vértice e dizer: <strong>“valeu completamente a pena”</strong>?', type: 'textarea', placeholder: 'Digite sua resposta...' },
@@ -300,7 +205,6 @@
             orb1.style.background = `radial-gradient(circle, ${theme.orb1} 0%, transparent 70%)`;
             orb2.style.background = `radial-gradient(circle, ${theme.orb2} 0%, transparent 70%)`;
 
-            // Leve deslocamento orgânico dos orbes a cada passo
             const shiftX = (stepIndex % 3 - 1) * 4;
             const shiftY = (stepIndex % 2 === 0 ? 1 : -1) * 4;
             orb1.style.transform = `translate(${shiftX}vw, ${shiftY}vh)`;
@@ -328,7 +232,6 @@
             const sectionBadge = document.getElementById('sectionBadge');
             const navFooter = document.getElementById('navFooter');
             const progressBar = document.getElementById('progressBar');
-            const stepCounter = document.getElementById('stepCounter');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtnText = document.getElementById('nextBtnText');
 
@@ -358,7 +261,6 @@
             navFooter.classList.remove('hidden');
             sectionBadge.innerText = q.section || 'Mentoria Vértice';
             progressBar.style.width = `${Math.round((currentStep / totalQuestions) * 100)}%`;
-            stepCounter.innerText = `${String(currentStep).padStart(2, '0')} / ${totalQuestions}`;
             prevBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
             nextBtnText.innerText = currentStep === totalQuestions ? 'Finalizar e Enviar' : 'Continuar';
 
@@ -417,13 +319,11 @@
             if (activeInput && q.type !== 'date') setTimeout(() => activeInput.focus(), 120);
         }
 
-        // Seleciona opção única ou nota de 0 a 10 SEM avançar automaticamente
         function selectRadio(val) {
             answers[questions[currentStep].id] = val;
             renderStep();
         }
 
-        // Seleciona ou desmarca múltiplas opções (Checkbox) SEM avançar automaticamente
         function toggleCheckbox(val) {
             const q = questions[currentStep];
             if (!Array.isArray(answers[q.id])) answers[q.id] = [];
@@ -494,7 +394,6 @@
             document.getElementById('nextBtnText').innerText = 'Enviando...';
 
             const params = new URLSearchParams();
-            // O seu formulário possui 7 páginas internas (0 a 6) por conta dos divisores de seção
             params.append('fvv', '1');
             params.append('pageHistory', '0,1,2,3,4,5,6');
             params.append('fbzx', '-1060927326772906912');
