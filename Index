@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Vértice | Diagnóstico Inicial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #090d16 55%, #000000 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        .ambient-orb-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 45vw;
+            height: 45vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(87, 70, 227, 0.18) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .ambient-orb-2 {
+            position: fixed;
+            bottom: -15%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+            filter: blur(70px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            color-scheme: dark;
+        }
+        .glass-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+        }
+        .glass-option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+        .glass-option:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.28);
+            transform: translateY(-1px);
+        }
+        .glass-option.selected {
+            background: rgba(255, 255, 255, 0.94);
+            color: #090d16;
+            border-color: #ffffff;
+            font-weight: 500;
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.25);
+        }
+        .step-transition {
+            transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .step-hidden-next {
+            opacity: 0;
+            transform: translateY(16px) scale(0.985);
+            pointer-events: none;
+        }
+        .step-hidden-prev {
+            opacity: 0;
+            transform: translateY(-16px) scale(0.985);
+            pointer-events: none;
+        }
+        .step-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4 sm:p-6 relative">
+
+    <div class="ambient-orb-1"></div>
+    <div class="ambient-orb-2"></div>
+
+    <!-- Barra de Progresso Superior -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-white/5 z-50">
+        <div id="progressBar" class="h-full bg-white/80 transition-all duration-500 ease-out" style="width: 0%"></div>
+    </div>
+
+    <!-- Card Principal Glassmorphism -->
+    <div class="glass-card rounded-3xl p-6 sm:p-12 w-full max-w-2xl z-10 relative my-auto">
+        
+        <!-- Header Minimalista -->
+        <div id="quizHeader" class="flex items-center justify-between text-xs uppercase tracking-widest text-white/40 mb-8 hidden">
+            <span id="sectionBadge">Mentoria Vértice • Diagnóstico</span>
+            <span id="stepCounter">01 / 36</span>
+        </div>
+
+        <!-- Container Dinâmico da Pergunta -->
+        <div id="stepContainer" class="step-transition step-visible min-h-[260px] flex flex-col justify-center">
+        </div>
+
+        <!-- Rodapé de Navegação -->
+        <div id="navFooter" class="flex items-center justify-between mt-10 pt-5 border-t border-white/10 hidden">
+            <button type="button" id="prevBtn" onclick="prevStep()" class="text-sm text-white/50 hover:text-white transition flex items-center gap-1.5 py-2 px-3 rounded-lg hover:bg-white/5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Anterior
+            </button>
+
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-white/30 hidden sm:inline" id="enterHint">Pressione <strong>Enter ↵</strong></span>
+                <button type="button" id="nextBtn" onclick="nextStep()" class="bg-white text-black hover:bg-white/90 font-medium text-sm px-6 py-3 rounded-xl transition shadow-lg shadow-white/10 flex items-center gap-2">
+                    <span id="nextBtnText">Continuar</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const GOOGLE_FORMS_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeAU1mT57ChiyeM7dqgi9tSmmunQex1Ng7iMhrOtzBIF3Ol9w/formResponse';
+
+        // Mapeamento 100% fiel aos IDs extraídos do seu Google Forms
+        const questions = [
+            { id: 'intro', type: 'welcome' },
+
+            // SEÇÃO 1: Dados Pessoais
+            { id: 'entry.100152716', section: '01 • Perfil', title: 'Qual é o seu nome completo?', type: 'text', placeholder: 'Digite seu nome completo...' },
+            { id: 'entry.669756892', section: '01 • Perfil', title: 'Qual é o seu CPF?', type: 'tel', mask: 'cpf', placeholder: '000.000.000-00' },
+            { id: 'entry.1709873192', section: '01 • Perfil', title: 'Sua data de nascimento', type: 'date' },
+            { id: 'entry.418282019', section: '01 • Perfil', title: 'Seu melhor e-mail', type: 'email', placeholder: 'seu@email.com' },
+            { id: 'entry.1941867306', section: '01 • Perfil', title: 'Seu WhatsApp com DDD', type: 'tel', mask: 'phone', placeholder: '(11)
